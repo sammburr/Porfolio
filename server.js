@@ -1,11 +1,9 @@
-// server.js
-
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
 const host = '0.0.0.0';
-const port = 80; // You can change this to any port you want
+const port = 80;
 
 var visCount = 0;
 
@@ -13,31 +11,27 @@ const server = http.createServer((req, res) => {
 
     console.log('Req::' + req.socket.remoteAddress + ':: ' + req.url);
 
-    // Define the root directory for serving files
-    const rootDir = path.join(__dirname, ''); // Assuming 'public' is your directory
-
     // Extract the URL path
     const urlPath = req.url === '/' ? '/index.html' : req.url;
-    const filePath = path.join(rootDir, urlPath);
+    const filePath = path.join(__dirname, urlPath);
 
     // Add a new visit to the counter
     if(req.url == '/') {
 
-        fs.readFile(path.join(rootDir, '/src/count.js'), 'utf8', (err, data) => {
+        fs.readFile(path.join(__dirname, '/src/count.js'), 'utf8', (err, data) => {
             if(err) {
                 console.error(err);
             }
             else {
-                console.log(data.substring(15).slice(0, -1));
-                visCount =  Number(data.substring(15).slice(0, -1));
+                visCount =  Number(data.substring(15).slice(0, -1)); // Rubbish stripping TODO: make better?
                 visCount = visCount + 1;
 
-                fs.writeFile(path.join(rootDir, '/src/count.js'), 'var visCount = ' +  String(visCount) + ';', err =>{
+                fs.writeFile(path.join(__dirname, '/src/count.js'), 'var visCount = ' +  String(visCount) + ';', err =>{
                     if(err) {
                         console.error(err);
                     }
                     else {
-                        console.log('added 1 to vis count');
+                        console.log('Visitor Count:: ' + visCount);
                     }
                 });
             }

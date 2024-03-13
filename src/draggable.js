@@ -23,7 +23,6 @@ function dragElement(elmnt) {
   }
 
   function dragMouseDown(e) {
-    console.log('1');
     e = e || window.event;
     e.preventDefault();
     // get the mouse cursor position at startup:
@@ -85,7 +84,6 @@ function dragElement(elmnt) {
   }
 
   function closeDragElement() {
-    console.log('hello');
     // stop moving when mouse button is released:
     document.onmouseup = null;
     document.removeEventListener('touchend', closeDragElement, {passive:false});

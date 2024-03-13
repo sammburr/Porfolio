@@ -140,6 +140,15 @@
         Your browser does not support HTML5
     </canvas>
 
+    <!-- 
+        The following is the main fragment shader, 
+        it is shared by the two canvas elements.
+
+        Use the uniform `int preset` to discriminate between the differnet
+        canvas elements.
+
+        TODO: Optmise
+    -->
     <script id="fragment-shader" type="x-fragment-shader">
     
     precision mediump float;
@@ -226,7 +235,6 @@
 
     void main() {
 
-
         float t = float(time) * .01;
 
         spheres[0] = Sphere(.5, vec3(sin(t * 2.5) + 2., .5, cos(t) + .75));
@@ -254,7 +262,7 @@
         }
 
         vec3 ro = vec3( 0, 0, -5);         // ray origin
-        vec3 rd = normalize(vec3(uv, 1)); // ray direction
+        vec3 rd = normalize(vec3(uv, 1));  // ray direction
 
         float ts = 0.;                     // distance travelled
 
@@ -318,7 +326,6 @@
 
         vec3 depth = vec3(ts * .1);
 
-        //col = mix(depth, mate, 0.5);
         col = mate;
 
         gl_FragColor = vec4(col, 1.0);
@@ -326,8 +333,8 @@
     
     </script>
     <script src="src/count.js"></script>
-    <script src="./src/main.js"></script>
-    <script src="src/styling.js"></script>
+    <script src="./src/main-comp.js"></script>
+    <script src="src/draggable-comp.js"></script>
 
 
 

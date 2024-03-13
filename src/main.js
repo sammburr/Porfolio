@@ -154,6 +154,11 @@ var compileProgram = function(gl) {
 
 var begin = function() {
 
+    console.log('updating hit count');
+
+    const fireMarq = document.getElementById('fireMarq');
+    fireMarq.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ⚠ ⚠ <b>this site has had ' + visCount + ' hits!</b> ⚠ ⚠';
+
     console.log('Starting up webGl...');
 
     startWindowCanvas();

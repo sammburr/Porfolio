@@ -30,7 +30,7 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     document.onmouseup = closeDragElement;
-    elmnt.addEventListener('touchend', closeDragElement, {passive:false});
+    document.addEventListener('touchend', closeDragElement, {passive:false});
 
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
@@ -88,7 +88,11 @@ function dragElement(elmnt) {
     console.log('hello');
     // stop moving when mouse button is released:
     document.onmouseup = null;
+    document.removeEventListener('touchend', closeDragElement, {passive:false});
+
     document.onmousemove = null;
+    document.removeEventListener('touchmove', elementDrag, {passive:false});
+
     resetMouseListen();
   }
 }

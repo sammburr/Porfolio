@@ -4,7 +4,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const host = '127.0.0.1';
+const host = '0.0.0.0';
 const port = 80; // You can change this to any port you want
 
 var visCount = 0;
